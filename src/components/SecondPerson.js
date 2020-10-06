@@ -5,8 +5,10 @@ const SecondPerson = () => {
   const [chatState, setChatState] = useState(chatStore.initialState)
 
   useLayoutEffect(() => {
-    chatStore.subscribe(setChatState)
+    const subs = chatStore.subscribe(setChatState)
     chatStore.init()
+
+    return () => subs.unsubscribe()
   }, [])
 
   const onFormSubmit = (e) => {
@@ -16,12 +18,12 @@ const SecondPerson = () => {
       text: e.target.elements.messageInput.value.trim(),
     }
     chatStore.sendMessage(messageObject)
-    // document.getElementById('messageForm').requestFullscreen()
+    document.getElementById('messageForm').reset()
   }
 
   return (
     <div className="container">
-      <h2>Cortana</h2>
+      <h2 style={{ float: 'right' }}>Cortana</h2>
       <div className="chat-box">
         {chatState.data.map((message) => (
           <div>
@@ -31,8 +33,8 @@ const SecondPerson = () => {
         ))}
       </div>
       <form id="messageForm" onSubmit={onFormSubmit}>
-        <input type="text" id="messageInput" name="messageInput" placeholder="type here..." required />
-        <button type="submit">Send</button>
+        <input type="text" id="messageInput" name="messageInput" required />
+        <button type="submit">Send</button> <br />
       </form>
       <button className="clear-button" onClick={() => chatStore.clearChat()}>
         Clear Chat

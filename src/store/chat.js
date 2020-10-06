@@ -1,7 +1,6 @@
 import { Subject } from 'rxjs'
 
 const subject = new Subject()
-
 const initialState = {
   status: '',
   data: [],
@@ -14,6 +13,7 @@ let state = initialState
 const chatStore = {
   init: () => {
     state = { ...state, newDataCount: 0 }
+    subject.next(state)
   },
   subscribe: (setState) => subject.subscribe(setState),
   sendMessage: (message) => {

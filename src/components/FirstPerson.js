@@ -5,8 +5,10 @@ const FirstPerson = () => {
   const [chatState, setChatState] = useState(chatStore.initialState)
 
   useLayoutEffect(() => {
-    chatStore.subscribe(setChatState)
+    const subs = chatStore.subscribe(setChatState)
     chatStore.init()
+
+    return () => subs.unsubscribe()
   }, [])
 
   const onFormSubmit = (e) => {
@@ -16,7 +18,7 @@ const FirstPerson = () => {
       text: e.target.elements.messageInput.value.trim(),
     }
     chatStore.sendMessage(messageObject)
-    // document.getElementById('messageForm').requestFullscreen()
+    document.getElementById('messageForm').reset()
   }
 
   return (
