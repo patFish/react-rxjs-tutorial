@@ -16,7 +16,7 @@ const SecondPerson = () => {
       text: e.target.elements.messageInput.value.trim(),
     }
     chatStore.sendMessage(messageObject)
-    document.getElementById('messageForm').requestFullscreen()
+    // document.getElementById('messageForm').requestFullscreen()
   }
 
   return (
