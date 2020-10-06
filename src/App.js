@@ -11,7 +11,7 @@ const App = () => (
       <Switch>
         <Route path="/" component={FirstPerson} exact />
         <Route path="/first-person" component={FirstPerson} exact />
-        <Route path="/second-person" component={SecondPerson} exact />>
+        <Route path="/second-person" component={SecondPerson} exact />
       </Switch>
     </BrowserRouter>
   </>
